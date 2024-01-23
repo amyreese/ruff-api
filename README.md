@@ -1,16 +1,16 @@
-# PROJECT_NAME
+# ruff-api
 
-PROJECT_DESCRIPTION
+Experimental Python API for Ruff
 
-[![version](https://img.shields.io/pypi/v/PACKAGE_NORMALIZED.svg)](https://pypi.org/project/PACKAGE_NORMALIZED)
-[![license](https://img.shields.io/pypi/l/PACKAGE_NORMALIZED.svg)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT/blob/main/LICENSE)
+[![version](https://img.shields.io/pypi/v/ruff-api.svg)](https://pypi.org/project/ruff-api)
+[![license](https://img.shields.io/pypi/l/ruff-api.svg)](https://github.com/amyreese/ruff-api/blob/main/LICENSE)
 
 
 Install
 -------
 
 ```shell-session
-$ pip install PACKAGE_NORMALIZED
+$ pip install ruff-api
 ```
 
 
@@ -18,11 +18,11 @@ Usage
 -----
 
 ```py
-import PACKAGE_NAME
+import ruff_api
 ```
 
 
 License
 -------
 
-PROJECT_NAME is copyright AUTHOR_NAME, and licensed under the MIT license.
+ruff-api is copyright Amethyst Reese, and licensed under the MIT license.

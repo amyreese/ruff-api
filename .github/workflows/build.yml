@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  GITHUB_PROJECT:
+  ruff-api:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

@@ -1,4 +1,4 @@
-# Contributing to PROJECT_NAME
+# Contributing to ruff-api
 
 ## Setup
 
