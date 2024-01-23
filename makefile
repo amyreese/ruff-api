@@ -1,5 +1,8 @@
-install:
+dev:
 	python -m maturin develop -E dev
+
+install:
+	python -m pip install -e .[dev]
 
 .venv:
 	python -m venv .venv
