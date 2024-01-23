@@ -1,0 +1,46 @@
+[build-system]
+requires = ["flit_core >=3.6,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "PACKAGE_NORMALIZED"
+readme = "README.md"
+authors = [
+    {name="AUTHOR_NAME", email="AUTHOR_EMAIL"},
+]
+license = {file="LICENSE"}
+dynamic = ["version", "description"]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "attribution==1.6.2",
+    "black==23.3.0",
+    "flake8==6.0.0",
+    "flit==3.8.0",
+    "mypy==1.2.0",
+    "ufmt==2.0.1",
+    "usort==1.0.6",
+]
+
+[project.scripts]
+PACKAGE_NORMALIZED = "PACKAGE_NAME.__main__:main"
+
+[project.urls]
+Home = "https://github.com/GITHUB_USERNAME/GITHUB_PROJECT"
+
+[tool.flit.sdist]
+exclude = [
+    ".github/",
+]
+
+[tool.attribution]
+name = "PROJECT_NAME"
+package = "PACKAGE_NAME"
+version_file = true
+ignored_authors = ["dependabot[bot]"]
+signed_tags = true
+
+[tool.mypy]
+strict = true
