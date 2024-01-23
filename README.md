@@ -6,6 +6,10 @@ Experimental Python API for Ruff
 [![license](https://img.shields.io/pypi/l/ruff-api.svg)](https://github.com/amyreese/ruff-api/blob/main/LICENSE)
 
 
+NOTE: This is project is highly experimental and the API is likely to change.
+Pin your dependencies accordingly.
+
+
 Install
 -------
 

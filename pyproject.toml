@@ -1,15 +1,21 @@
 [build-system]
-requires = ["flit_core >=3.6,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
 
 [project]
 name = "ruff-api"
+description = "Experimental API for Ruff"
 readme = "README.md"
 authors = [
     {name="Amethyst Reese", email="amethyst@n7.gg"},
 ]
 license = {file="LICENSE"}
-dynamic = ["version", "description"]
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
 requires-python = ">=3.10"
 dependencies = []
 
@@ -30,10 +36,9 @@ ruff-api = "ruff_api.__main__:main"
 [project.urls]
 Home = "https://github.com/amyreese/ruff-api"
 
-[tool.flit.sdist]
-exclude = [
-    ".github/",
-]
+[tool.maturin]
+features = ["pyo3/extension-module"]
+module-name = "ruff_api._rust"
 
 [tool.attribution]
 name = "ruff-api"

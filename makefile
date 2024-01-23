@@ -1,5 +1,5 @@
 install:
-	python -m pip install -Ue .[dev]
+	python -m maturin develop -E dev
 
 .venv:
 	python -m venv .venv
@@ -23,7 +23,7 @@ release: lint test clean
 	flit publish
 
 clean:
-	rm -rf .mypy_cache build dist html *.egg-info
+	rm -rf .mypy_cache build dist html *.egg-info ruff_api/*.so
 
 distclean: clean
 	rm -rf .venv
