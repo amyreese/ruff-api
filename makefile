@@ -12,7 +12,7 @@ install:
 venv: .venv
 
 test:
-	python -m ruff_api.tests
+	python -m pytest
 	python -m mypy -p ruff_api
 
 lint:
@@ -22,8 +22,9 @@ lint:
 format:
 	python -m ufmt format ruff_api
 
-release: lint test clean
-	flit publish
+release: test lint
+	@echo "\nPush tags to github and let CI handle it!\n"
+	@exit 1
 
 clean:
 	rm -rf .mypy_cache build dist html *.egg-info ruff_api/*.so
