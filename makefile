@@ -12,7 +12,7 @@ install:
 venv: .venv
 
 test:
-	# python -m unittest -v ruff_api
+	python -m ruff_api.tests
 	python -m mypy -p ruff_api
 
 lint:
