@@ -8,8 +8,9 @@ name: wheels
 on:
   push:
     branches:
-      - main
-      - master
+      # - main
+      - 'wheel*'
+      - 'release*'
     tags:
       - '*'
   # pull_request:
