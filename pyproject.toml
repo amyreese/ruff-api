@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 dependencies = []
 
 [project.optional-dependencies]
@@ -27,6 +27,7 @@ dev = [
     "flit==3.8.0",
     "maturin==1.4.0",
     "mypy==1.2.0",
+    "pytest==8.0.1",
     "ufmt==2.0.1",
     "usort==1.0.6",
 ]
@@ -50,3 +51,6 @@ signed_tags = true
 
 [tool.mypy]
 strict = true
+
+[tool.pytest.ini_options]
+python_files = "tests/*.py"
