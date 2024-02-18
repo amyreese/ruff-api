@@ -42,6 +42,7 @@ module-name = "ruff_api._rust"
 [tool.attribution]
 name = "ruff-api"
 package = "ruff_api"
+cargo_packages = ["ruff-api"]
 version_file = true
 ignored_authors = ["dependabot[bot]"]
 signed_tags = true
