@@ -32,9 +32,6 @@ dev = [
     "usort==1.0.6",
 ]
 
-[project.scripts]
-ruff-api = "ruff_api.__main__:main"
-
 [project.urls]
 Home = "https://github.com/amyreese/ruff-api"
 
