@@ -24,7 +24,6 @@ dev = [
     "attribution==1.7.1",
     "black==24.2.0",
     "flake8==7.0.0",
-    "flit==3.8.0",
     "maturin==1.4.0",
     "mypy==1.8.0",
     "pytest==8.0.2",
@@ -52,3 +51,6 @@ strict = true
 
 [tool.pytest.ini_options]
 python_files = "tests/*.py"
+
+[tool.ufmt]
+formatter = "ruff-api"

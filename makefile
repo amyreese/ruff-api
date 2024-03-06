@@ -1,8 +1,8 @@
-dev:
-	python -m maturin develop -E dev
-
 install:
 	python -m pip install -e .[dev]
+
+version:
+	python -m scripts.ruff_version
 
 .venv:
 	python -m venv .venv
