@@ -28,7 +28,7 @@ dev = [
     "maturin==1.4.0",
     "mypy==1.8.0",
     "pytest==8.0.1",
-    "ufmt==2.3.0",
+    "ufmt==2.5.1",
     "usort==1.0.8.post1",
 ]
 
