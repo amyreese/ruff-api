@@ -1,6 +1,5 @@
 use pyo3::exceptions::{self};
 use pyo3::{create_exception, prelude::*};
-use ruff;
 use ruff_formatter::LineWidth;
 use ruff_python_ast::PySourceType;
 use ruff_python_formatter::{self, PreviewMode, PyFormatOptions, PythonVersion};
