@@ -52,3 +52,6 @@ strict = true
 
 [tool.pytest.ini_options]
 python_files = "tests/*.py"
+
+[tool.ufmt]
+formatter = "ruff-api"
