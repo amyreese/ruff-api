@@ -1,3 +1,5 @@
+from typing import List
+
 class FormatOptions:
     def __init__(
         self,
@@ -8,4 +10,15 @@ class FormatOptions:
 
 def format_string(
     path: str, source: str, options: FormatOptions | None = None
+) -> str: ...
+
+class ImportSortOptions:
+    def __init__(
+        self,
+        first_party_modules: List[str] | None = None,
+        standard_library_modules: List[str] | None = None,
+    ): ...
+
+def import_sort_string(
+    path: str, source: str, options: ImportSortOptions | None = None
 ) -> str: ...
