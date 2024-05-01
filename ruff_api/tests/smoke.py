@@ -103,29 +103,29 @@ class SmokeTest(TestCase):
             ruff_api.format_string("hello.py", CODE_UNFORMATTED, options),
         )
 
-    def test_import_sort(self) -> None:
+    def test_isort(self) -> None:
         self.assertEqual(
             CODE_SORTED_IMPORTS,
-            ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS),
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS),
         )
 
-    def test_import_sort_configuration(self) -> None:
-        options = ruff_api.ImportSortOptions(["firstparty"], [])
+    def test_isort_options(self) -> None:
         # missing sysmod
+        options = ruff_api.SortOptions(["firstparty"], [])
         self.assertNotEqual(
             CODE_SORTED_IMPORTS,
-            ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
         # missing firstparty
-        options = ruff_api.ImportSortOptions([], ["sysmod"])
+        options = ruff_api.SortOptions([], ["sysmod"])
         self.assertNotEqual(
             CODE_SORTED_IMPORTS,
-            ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
-        options = ruff_api.ImportSortOptions(["firstparty"], ["sysmod"])
+        options = ruff_api.SortOptions(["firstparty"], ["sysmod"])
         self.assertEqual(
             CODE_SORTED_IMPORTS_CUSTOM,
-            ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
