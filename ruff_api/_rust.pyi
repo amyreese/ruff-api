@@ -12,13 +12,11 @@ def format_string(
     path: str, source: str, options: FormatOptions | None = None
 ) -> str: ...
 
-class ImportSortOptions:
+class SortOptions:
     def __init__(
         self,
         first_party_modules: List[str] | None = None,
         standard_library_modules: List[str] | None = None,
     ): ...
 
-def import_sort_string(
-    path: str, source: str, options: ImportSortOptions | None = None
-) -> str: ...
+def isort_string(path: str, source: str, options: SortOptions | None = None) -> str: ...

@@ -100,13 +100,13 @@ fn format_string(
 
 #[pyclass(get_all)]
 #[derive(Default, Clone)]
-struct ImportSortOptions {
+struct SortOptions {
     first_party_modules: Vec<String>,
     standard_library_modules: Vec<String>,
 }
 
 #[pymethods]
-impl ImportSortOptions {
+impl SortOptions {
     #[new]
     #[pyo3(signature = (first_party_modules=None, standard_library_modules=None))]
     fn new(
@@ -122,14 +122,14 @@ impl ImportSortOptions {
 
 #[pyfunction]
 #[pyo3(signature = (path, source, options=None))]
-fn import_sort_string(
+fn isort_string(
     path: String,
     source: String,
-    options: Option<&ImportSortOptions>,
+    options: Option<&SortOptions>,
 ) -> PyResult<String> {
     let ipath: &Path = Path::new(&path);
-    let options: ImportSortOptions = match options {
-        None => ImportSortOptions::default(),
+    let options: SortOptions = match options {
+        None => SortOptions::default(),
         Some(options) => options.clone(),
     };
 
@@ -207,8 +207,8 @@ fn import_sort_string(
 fn ruff_api(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(format_string, m)?)?;
     m.add_class::<FormatOptions>()?;
-    m.add_function(wrap_pyfunction!(import_sort_string, m)?)?;
-    m.add_class::<ImportSortOptions>()?;
+    m.add_function(wrap_pyfunction!(isort_string, m)?)?;
+    m.add_class::<SortOptions>()?;
     m.add("FormatModuleError", _py.get_type::<FormatModuleError>())?;
     m.add("FormatError", _py.get_type::<FormatError>())?;
     m.add("ParseError", _py.get_type::<ParseError>())?;
