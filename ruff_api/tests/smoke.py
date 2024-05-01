@@ -5,7 +5,6 @@ from unittest import TestCase
 
 import ruff_api
 
-
 CODE_UNFORMATTED = """
 import sys
 def foo():

@@ -18,6 +18,7 @@ test:
 lint:
 	python -m flake8 ruff_api
 	python -m ufmt check ruff_api
+	python scripts/validate_formatting.py
 
 format:
 	python -m ufmt format ruff_api
