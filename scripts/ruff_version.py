@@ -22,7 +22,6 @@ if __name__ == "__main__":
 
         ruff_version = "{version}"
         '''
-
     )
 
     cargo_lock = Path(__file__).parent.parent / "Cargo.lock"
