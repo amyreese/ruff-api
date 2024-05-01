@@ -33,6 +33,8 @@ fn convert_error(error: &ruff_python_formatter::FormatModuleError) -> PyErr {
     }
 }
 
+// -- Formatting --
+
 #[pyclass(get_all)]
 struct FormatOptions {
     target_version: String,
@@ -75,7 +77,29 @@ impl FormatOptions {
     }
 }
 
+/// Formats a string of code with the given options
+#[pyfunction]
+#[pyo3(signature = (path, source, options=None))]
+fn format_string(
+    path: String,
+    source: String,
+    options: Option<&FormatOptions>,
+) -> PyResult<String> {
+    let path: &Path = Path::new(&path);
+    let format_options: PyFormatOptions = match options {
+        None => PyFormatOptions::default(),
+        Some(options) => options.to_format_options(&path),
+    };
+    match ruff_python_formatter::format_module_source(&source.as_str(), format_options) {
+        Ok(fm) => Ok(fm.into_code()),
+        Err(e) => Err(convert_error(&e)),
+    }
+}
+
+// -- Import Sorting --
+
 #[pyclass(get_all)]
+#[derive(Default, Clone)]
 struct ImportSortOptions {
     first_party_modules: Vec<String>,
     standard_library_modules: Vec<String>,
@@ -104,15 +128,17 @@ fn import_sort_string(
     options: Option<&ImportSortOptions>,
 ) -> PyResult<String> {
     let ipath: &Path = Path::new(&path);
+    let options: ImportSortOptions = match options {
+        None => ImportSortOptions::default(),
+        Some(options) => options.clone(),
+    };
 
     let first_party_modules_pattern = options
-        .unwrap()
         .first_party_modules
         .iter()
         .map(|s| Pattern::new(s).expect("Invalid pattern"))
         .collect();
     let standard_lib_modules_pattern = options
-        .unwrap()
         .standard_library_modules
         .iter()
         .map(|s| Pattern::new(s).expect("Invalid pattern"))
@@ -173,24 +199,7 @@ fn import_sort_string(
     };
 }
 
-/// Formats a string of code with the given options
-#[pyfunction]
-#[pyo3(signature = (path, source, options=None))]
-fn format_string(
-    path: String,
-    source: String,
-    options: Option<&FormatOptions>,
-) -> PyResult<String> {
-    let path: &Path = Path::new(&path);
-    let format_options: PyFormatOptions = match options {
-        None => PyFormatOptions::default(),
-        Some(options) => options.to_format_options(&path),
-    };
-    match ruff_python_formatter::format_module_source(&source.as_str(), format_options) {
-        Ok(fm) => Ok(fm.into_code()),
-        Err(e) => Err(convert_error(&e)),
-    }
-}
+// -- Python Module Initializer --
 
 /// Experimental Python API for Ruff
 #[pymodule]
