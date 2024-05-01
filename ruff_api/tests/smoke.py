@@ -42,7 +42,8 @@ def foo():
 foo()
 """
 
-CODE_UNSORTED_IMPORTS = """import sys, CUSTOMMOD
+CODE_UNSORTED_IMPORTS = """\
+import sys, CUSTOMMOD
 from firstparty import a, c,b
 from sysmod import Z,x
 import __strict__
@@ -60,6 +61,23 @@ import __static__
 import __strict__
 
 import sys
+
+import CUSTOMMOD
+import somecustom
+from firstparty import a, b, c
+from sysmod import x, Z
+
+
+def main(): pass
+"""
+
+CODE_SORTED_IMPORTS_CUSTOM = """\
+import __future__
+
+import __static__
+import __strict__
+
+import sys
 from sysmod import x, Z
 
 import CUSTOMMOD
@@ -71,13 +89,14 @@ from firstparty import a, b, c
 def main(): pass
 """
 
+
 class SmokeTest(TestCase):
-    def test_basic(self) -> None:
+    def test_format(self) -> None:
         self.assertEqual(
             CODE_FORMATTED, ruff_api.format_string("hello.py", CODE_UNFORMATTED)
         )
 
-    def test_basic_options(self) -> None:
+    def test_format_basic_options(self) -> None:
         options = ruff_api.FormatOptions(line_width=20)
         self.assertEqual(
             CODE_FORMATTED_LL20,
@@ -85,22 +104,28 @@ class SmokeTest(TestCase):
         )
 
     def test_import_sort(self) -> None:
+        self.assertEqual(
+            CODE_SORTED_IMPORTS,
+            ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS),
+        )
+
+    def test_import_sort_configuration(self) -> None:
         options = ruff_api.ImportSortOptions(["firstparty"], [])
         # missing sysmod
-        self.assertNotEqual( 
+        self.assertNotEqual(
             CODE_SORTED_IMPORTS,
             ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
         # missing firstparty
         options = ruff_api.ImportSortOptions([], ["sysmod"])
-        self.assertNotEqual( 
+        self.assertNotEqual(
             CODE_SORTED_IMPORTS,
             ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
         options = ruff_api.ImportSortOptions(["firstparty"], ["sysmod"])
         self.assertEqual(
-            CODE_SORTED_IMPORTS,
+            CODE_SORTED_IMPORTS_CUSTOM,
             ruff_api.import_sort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
