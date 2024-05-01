@@ -146,7 +146,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "05efc5cfd9110c8416e471df0e96702d58690178e206e61b7173706673c93706"
 dependencies = [
  "memchr",
- "regex-automata",
+ "regex-automata 0.4.6",
  "serde",
 ]
 
@@ -176,6 +176,12 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "cfg_aliases"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
 
 [[package]]
 name = "chic"
@@ -282,9 +288,9 @@ checksum = "98cc8fbded0c607b7ba9dd60cd98df59af97e84d24e49c8557331cfc26d301ce"
 
 [[package]]
 name = "clearscreen"
-version = "2.0.1"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72f3f22f1a586604e62efd23f78218f3ccdecf7a33c4500db2d37d85a24fe994"
+checksum = "2f8c93eb5f77c9050c7750e14f13ef1033a40a0aac70c6371535b6763a01438c"
 dependencies = [
  "nix",
  "terminfo",
@@ -322,6 +328,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7704b5fdd17b18ae31c4c1da5a2e0305a2bf17b5249300a9ee9ed7b72114c636"
 
 [[package]]
+name = "crossbeam"
+version = "0.8.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1137cd7e7fc0fb5d3c5a8678be38ec56e819125d8d7907411fe24ccb943faca8"
+dependencies = [
+ "crossbeam-channel",
+ "crossbeam-deque",
+ "crossbeam-epoch",
+ "crossbeam-queue",
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "crossbeam-channel"
 version = "0.5.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -345,6 +364,15 @@ name = "crossbeam-epoch"
 version = "0.9.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e"
+dependencies = [
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-queue"
+version = "0.3.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df0346b5d5e76ac2fe4e327c5fd1118d6be7c51dfb18f9b7922923f287471e35"
 dependencies = [
  "crossbeam-utils",
 ]
@@ -562,8 +590,8 @@ dependencies = [
  "aho-corasick",
  "bstr",
  "log",
- "regex-automata",
- "regex-syntax",
+ "regex-automata 0.4.6",
+ "regex-syntax 0.8.3",
 ]
 
 [[package]]
@@ -583,6 +611,12 @@ name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
+
+[[package]]
+name = "hermit-abi"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d231dfb89cfffdbc30e7fc41579ed6066ad03abda9e567ccafae602b97ec5024"
 
 [[package]]
 name = "hexf-parse"
@@ -648,7 +682,7 @@ dependencies = [
  "globset",
  "log",
  "memchr",
- "regex-automata",
+ "regex-automata 0.4.6",
  "same-file",
  "walkdir",
  "winapi-util",
@@ -746,6 +780,12 @@ name = "itoa"
 version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
+
+[[package]]
+name = "jod-thread"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b23360e99b8717f20aaa4598f5a6541efbe30630039fbc7706cf954a87947ae"
 
 [[package]]
 name = "js-sys"
@@ -892,6 +932,40 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
 
 [[package]]
+name = "lsp-server"
+version = "0.7.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "248f65b78f6db5d8e1b1604b4098a28b43d21a8eb1deeca22b1c421b276c7095"
+dependencies = [
+ "crossbeam-channel",
+ "log",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "lsp-types"
+version = "0.95.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8e34d33a8e9b006cd3fc4fe69a921affa097bae4bb65f76271f4644f9a334365"
+dependencies = [
+ "bitflags 1.3.2",
+ "serde",
+ "serde_json",
+ "serde_repr",
+ "url",
+]
+
+[[package]]
+name = "matchers"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8263075bb86c5a1b1427b5ae862e8889656f126e9f77c484496e8b47cf5c5558"
+dependencies = [
+ "regex-automata 0.1.10",
+]
+
+[[package]]
 name = "matches"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -947,12 +1021,13 @@ checksum = "308d96db8debc727c3fd9744aac51751243420e46edf401010908da7f8d5e57c"
 
 [[package]]
 name = "nix"
-version = "0.26.4"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "598beaf3cc6fdd9a5dfb1630c2800c7acd31df7aaf0f565796fba2b53ca1af1b"
+checksum = "ab2156c4fce2f8df6c499cc1c763e4394b7482525bf2a9701c9d79d215f519e4"
 dependencies = [
- "bitflags 1.3.2",
+ "bitflags 2.5.0",
  "cfg-if",
+ "cfg_aliases",
  "libc",
 ]
 
@@ -986,12 +1061,41 @@ dependencies = [
 ]
 
 [[package]]
+name = "nu-ansi-term"
+version = "0.46.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77a8165726e8236064dbb45459242600304b42a5ea24ee2948e18e023bf7ba84"
+dependencies = [
+ "overload",
+ "winapi",
+]
+
+[[package]]
+name = "nu-ansi-term"
+version = "0.49.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c073d3c1930d0751774acf49e66653acecb416c3a54c6ec095a9b11caddb5a68"
+dependencies = [
+ "windows-sys 0.48.0",
+]
+
+[[package]]
 name = "num-traits"
 version = "0.2.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da0df0e5185db44f69b44f26786fe401b6c293d1907744beaa7fa62b2e5a517a"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "num_cpus"
+version = "1.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4161fcb6d602d4d2081af7c3a45852d875a03dd337a6bfdd6e06407b61342a43"
+dependencies = [
+ "hermit-abi",
+ "libc",
 ]
 
 [[package]]
@@ -1014,6 +1118,12 @@ checksum = "e2355d85b9a3786f481747ced0e0ff2ba35213a1f9bd406ed906554d7af805a1"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "overload"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 
 [[package]]
 name = "parking_lot"
@@ -1108,13 +1218,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "pep440_rs"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "15efd4d885c29126cc93e12af3087896e2518bd5ca0fb328c19c4ef9cecfa8be"
+dependencies = [
+ "once_cell",
+ "serde",
+ "unicode-width",
+ "unscanny",
+]
+
+[[package]]
 name = "pep508_rs"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "910c513bea0f4f833122321c0f20e8c704e01de98692f6989c2ec21f43d88b1e"
 dependencies = [
  "once_cell",
- "pep440_rs",
+ "pep440_rs 0.4.0",
  "regex",
  "serde",
  "thiserror",
@@ -1266,7 +1388,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "95c3dd745f99aa3c554b7bb00859f7d18c2f1d6afd749ccc86d60b61e702abd9"
 dependencies = [
  "indexmap",
- "pep440_rs",
+ "pep440_rs 0.4.0",
  "pep508_rs",
  "serde",
  "toml",
@@ -1391,8 +1513,17 @@ checksum = "c117dbdfde9c8308975b6a18d71f3f385c89461f7b3fb054288ecf2a2058ba4c"
 dependencies = [
  "aho-corasick",
  "memchr",
- "regex-automata",
- "regex-syntax",
+ "regex-automata 0.4.6",
+ "regex-syntax 0.8.3",
+]
+
+[[package]]
+name = "regex-automata"
+version = "0.1.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c230d73fb8d8c1b9c0b3135c5142a8acee3a0558fb8db5cf1cb65f8d7862132"
+dependencies = [
+ "regex-syntax 0.6.29",
 ]
 
 [[package]]
@@ -1403,8 +1534,14 @@ checksum = "86b83b8b9847f9bf95ef68afb0b8e6cdb80f498442f5179a29fad448fcc1eaea"
 dependencies = [
  "aho-corasick",
  "memchr",
- "regex-syntax",
+ "regex-syntax 0.8.3",
 ]
+
+[[package]]
+name = "regex-syntax"
+version = "0.6.29"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f162c6dd7b008981e4d40210aca20b4bd0f9b60ca9271061b07f78537722f2e1"
 
 [[package]]
 name = "regex-syntax"
@@ -1435,8 +1572,8 @@ dependencies = [
 
 [[package]]
 name = "ruff"
-version = "0.3.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+version = "0.3.7"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
  "argfile",
@@ -1455,6 +1592,7 @@ dependencies = [
  "log",
  "mimalloc",
  "notify",
+ "num_cpus",
  "path-absolutize",
  "rayon",
  "regex",
@@ -1465,6 +1603,7 @@ dependencies = [
  "ruff_notebook",
  "ruff_python_ast",
  "ruff_python_formatter",
+ "ruff_server",
  "ruff_source_file",
  "ruff_text_size",
  "ruff_workspace",
@@ -1478,6 +1617,8 @@ dependencies = [
  "tikv-jemallocator",
  "toml",
  "tracing",
+ "tracing-subscriber",
+ "tracing-tree",
  "walkdir",
  "wild",
 ]
@@ -1500,7 +1641,7 @@ dependencies = [
 [[package]]
 name = "ruff_cache"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "filetime",
  "glob",
@@ -1513,7 +1654,7 @@ dependencies = [
 [[package]]
 name = "ruff_diagnostics"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
  "is-macro",
@@ -1525,7 +1666,7 @@ dependencies = [
 [[package]]
 name = "ruff_formatter"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "drop_bomb",
  "ruff_cache",
@@ -1541,15 +1682,15 @@ dependencies = [
 [[package]]
 name = "ruff_index"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "ruff_macros",
 ]
 
 [[package]]
 name = "ruff_linter"
-version = "0.3.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+version = "0.3.7"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "aho-corasick",
  "annotate-snippets 0.9.2",
@@ -1572,14 +1713,13 @@ dependencies = [
  "once_cell",
  "path-absolutize",
  "pathdiff",
- "pep440_rs",
+ "pep440_rs 0.5.0",
  "pyproject-toml",
  "quick-junit",
  "regex",
  "result-like",
  "ruff_cache",
  "ruff_diagnostics",
- "ruff_index",
  "ruff_macros",
  "ruff_notebook",
  "ruff_python_ast",
@@ -1593,7 +1733,6 @@ dependencies = [
  "ruff_source_file",
  "ruff_text_size",
  "rustc-hash",
- "semver",
  "serde",
  "serde_json",
  "similar",
@@ -1611,7 +1750,7 @@ dependencies = [
 [[package]]
 name = "ruff_macros"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "itertools",
  "proc-macro2",
@@ -1623,7 +1762,7 @@ dependencies = [
 [[package]]
 name = "ruff_notebook"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
  "itertools",
@@ -1642,7 +1781,7 @@ dependencies = [
 [[package]]
 name = "ruff_python_ast"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "aho-corasick",
  "bitflags 2.5.0",
@@ -1654,13 +1793,12 @@ dependencies = [
  "ruff_text_size",
  "rustc-hash",
  "serde",
- "smallvec",
 ]
 
 [[package]]
 name = "ruff_python_codegen"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "once_cell",
  "ruff_python_ast",
@@ -1672,10 +1810,9 @@ dependencies = [
 [[package]]
 name = "ruff_python_formatter"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
- "bitflags 2.5.0",
  "clap",
  "countme",
  "itertools",
@@ -1703,7 +1840,7 @@ dependencies = [
 [[package]]
 name = "ruff_python_index"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "ruff_python_ast",
  "ruff_python_parser",
@@ -1715,23 +1852,22 @@ dependencies = [
 [[package]]
 name = "ruff_python_literal"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "bitflags 2.5.0",
  "hexf-parse",
- "is-macro",
  "itertools",
  "lexical-parse-float",
+ "ruff_python_ast",
  "unic-ucd-category",
 ]
 
 [[package]]
 name = "ruff_python_parser"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
- "bitflags 2.5.0",
  "bstr",
  "is-macro",
  "itertools",
@@ -1743,13 +1879,14 @@ dependencies = [
  "static_assertions",
  "tiny-keccak",
  "unicode-ident",
+ "unicode-normalization",
  "unicode_names2",
 ]
 
 [[package]]
 name = "ruff_python_semantic"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "bitflags 2.5.0",
  "is-macro",
@@ -1759,13 +1896,12 @@ dependencies = [
  "ruff_source_file",
  "ruff_text_size",
  "rustc-hash",
- "smallvec",
 ]
 
 [[package]]
 name = "ruff_python_stdlib"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "unicode-ident",
 ]
@@ -1773,7 +1909,7 @@ dependencies = [
 [[package]]
 name = "ruff_python_trivia"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "itertools",
  "ruff_source_file",
@@ -1782,9 +1918,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "ruff_server"
+version = "0.2.2"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
+dependencies = [
+ "anyhow",
+ "crossbeam",
+ "jod-thread",
+ "libc",
+ "lsp-server",
+ "lsp-types",
+ "ruff_diagnostics",
+ "ruff_formatter",
+ "ruff_linter",
+ "ruff_python_ast",
+ "ruff_python_codegen",
+ "ruff_python_formatter",
+ "ruff_python_index",
+ "ruff_python_parser",
+ "ruff_source_file",
+ "ruff_text_size",
+ "ruff_workspace",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "tracing",
+]
+
+[[package]]
 name = "ruff_source_file"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "memchr",
  "once_cell",
@@ -1795,7 +1959,7 @@ dependencies = [
 [[package]]
 name = "ruff_text_size"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "serde",
 ]
@@ -1803,7 +1967,7 @@ dependencies = [
 [[package]]
 name = "ruff_workspace"
 version = "0.0.0"
-source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.0#b53118ed0016ac37233d3dadbcea9ed3ac1f538e"
+source = "git+https://github.com/astral-sh/ruff.git?tag=v0.3.7#2e37cf6b3b4b873ad9ffe9728bccdf134862b768"
 dependencies = [
  "anyhow",
  "colored",
@@ -1814,9 +1978,8 @@ dependencies = [
  "is-macro",
  "itertools",
  "log",
- "once_cell",
  "path-absolutize",
- "pep440_rs",
+ "pep440_rs 0.5.0",
  "regex",
  "ruff_cache",
  "ruff_formatter",
@@ -1895,12 +2058,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 
 [[package]]
-name = "semver"
-version = "1.0.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92d43fe69e652f3df9bdc2b85b2854a0825b86e4fb76bc44d945137d053639ca"
-
-[[package]]
 name = "serde"
 version = "1.0.199"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1929,6 +2086,17 @@ dependencies = [
  "itoa",
  "ryu",
  "serde",
+]
+
+[[package]]
+name = "serde_repr"
+version = "0.1.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c64451ba24fc7a6a2d60fc75dd9c83c90903b19028d4eff35e88fc1e86564e9"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.60",
 ]
 
 [[package]]
@@ -1961,6 +2129,15 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.60",
+]
+
+[[package]]
+name = "sharded-slab"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f40ca3c46823713e0d4209592e8d6e826aa57e928f09752619fc696c499637f6"
+dependencies = [
+ "lazy_static",
 ]
 
 [[package]]
@@ -2019,18 +2196,18 @@ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
 
 [[package]]
 name = "strum"
-version = "0.25.0"
+version = "0.26.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "290d54ea6f91c969195bdbcd7442c8c2a2ba87da8bf60a7ee86a235d4bc1e125"
+checksum = "5d8cec3501a5194c432b2b7976db6b7d10ec95c253208b45f83f7136aa985e29"
 dependencies = [
  "strum_macros",
 ]
 
 [[package]]
 name = "strum_macros"
-version = "0.25.3"
+version = "0.26.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23dc1fa9ac9c169a78ba62f0b841814b7abae11bdd047b9c58f893439e309ea0"
+checksum = "c6cf59daf282c0a494ba14fd21610a0325f9f90ec9d1231dea26bcb1d696c946"
 dependencies = [
  "heck 0.4.1",
  "proc-macro2",
@@ -2120,6 +2297,16 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.60",
+]
+
+[[package]]
+name = "thread_local"
+version = "1.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b9ef9bad013ada3808854ceac7b46812a6465ba368859a37e2100283d2d719c"
+dependencies = [
+ "cfg-if",
+ "once_cell",
 ]
 
 [[package]]
@@ -2230,6 +2417,48 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c06d3da6113f116aaee68e4d601191614c9053067f9ab7f6edbcb161237daa54"
 dependencies = [
  "once_cell",
+ "valuable",
+]
+
+[[package]]
+name = "tracing-log"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee855f1f400bd0e5c02d150ae5de3840039a3f54b025156404e34c23c03f47c3"
+dependencies = [
+ "log",
+ "once_cell",
+ "tracing-core",
+]
+
+[[package]]
+name = "tracing-subscriber"
+version = "0.3.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad0f048c97dbd9faa9b7df56362b8ebcaa52adb06b498c050d2f4e32f90a7a8b"
+dependencies = [
+ "matchers",
+ "nu-ansi-term 0.46.0",
+ "once_cell",
+ "regex",
+ "sharded-slab",
+ "smallvec",
+ "thread_local",
+ "tracing",
+ "tracing-core",
+ "tracing-log",
+]
+
+[[package]]
+name = "tracing-tree"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "65139ecd2c3f6484c3b99bc01c77afe21e95473630747c7aca525e78b0666675"
+dependencies = [
+ "nu-ansi-term 0.49.0",
+ "tracing-core",
+ "tracing-log",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -2336,6 +2565,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e1766d682d402817b5ac4490b3c3002d91dfa0d22812f341609f97b08757359c"
 
 [[package]]
+name = "unscanny"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e9df2af067a7953e9c3831320f35c1cc0600c30d44d9f7a12b01db1cd88d6b47"
+
+[[package]]
 name = "url"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2375,6 +2610,12 @@ dependencies = [
  "quote",
  "syn 2.0.60",
 ]
+
+[[package]]
+name = "valuable"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
 
 [[package]]
 name = "vte"
@@ -2468,14 +2709,14 @@ checksum = "af190c94f2773fdb3729c55b007a722abb5384da03bc0986df4c289bf5567e96"
 
 [[package]]
 name = "which"
-version = "4.4.2"
+version = "6.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87ba24419a2078cd2b0f2ede2691b6c66d8e47836da3b6db8265ebad47afbfc7"
+checksum = "8211e4f58a2b2805adfbefbc07bab82958fc91e3836339b1ab7ae32465dce0d7"
 dependencies = [
  "either",
  "home",
- "once_cell",
  "rustix",
+ "winsafe",
 ]
 
 [[package]]
@@ -2674,6 +2915,12 @@ checksum = "14b9415ee827af173ebb3f15f9083df5a122eb93572ec28741fb153356ea2578"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "winsafe"
+version = "0.0.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d135d17ab770252ad95e9a872d365cf3090e3be864a34ab46f48555993efc904"
 
 [[package]]
 name = "yansi-term"
