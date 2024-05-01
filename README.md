@@ -25,6 +25,18 @@ Usage
 import ruff_api
 ```
 
+Format the contents of a file in memory:
+
+```py
+code = ruff_api.format_string(filename, code)
+```
+
+Sort imports in memory:
+
+```py
+code = ruff_api.isort_string(filename, code)
+```
+
 
 License
 -------
