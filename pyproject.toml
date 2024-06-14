@@ -27,7 +27,7 @@ dev = [
     "flake8==7.0.0",
     "maturin==1.5.1",
     "mypy==1.10.0",
-    "pytest==8.2.0",
+    "pytest==8.2.2",
     "ufmt==2.6.0",
     "usort==1.0.8.post1",
 ]
