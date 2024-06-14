@@ -1,7 +1,8 @@
 # Copyright Amethyst Reese
 # Licensed under the MIT license
 
-from unittest import TestCase
+import multiprocessing
+from unittest import expectedFailure, TestCase
 
 import ruff_api
 
@@ -88,6 +89,10 @@ from firstparty import a, b, c
 def main(): pass
 """
 
+CODE_INVALID = """\
+print "hello world!"
+"""
+
 
 class SmokeTest(TestCase):
     def test_format(self) -> None:
@@ -101,6 +106,16 @@ class SmokeTest(TestCase):
             CODE_FORMATTED_LL20,
             ruff_api.format_string("hello.py", CODE_UNFORMATTED, options),
         )
+
+    def test_format_parse_error(self) -> None:
+        with self.subTest("bare"):
+            with self.assertRaises(ruff_api.ParseError):
+                ruff_api.format_string("invalid.py", CODE_INVALID)
+
+        with self.subTest("pickled"):
+            with multiprocessing.Pool(1) as pool:
+                with self.assertRaises(ruff_api.ParseError):
+                    pool.apply(ruff_api.format_string, ("invalid.py", CODE_INVALID))
 
     def test_isort(self) -> None:
         self.assertEqual(
@@ -128,3 +143,9 @@ class SmokeTest(TestCase):
             CODE_SORTED_IMPORTS_CUSTOM,
             ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
+
+    @expectedFailure
+    def test_isort_parse_error(self) -> None:
+        with self.assertRaises(ruff_api.RuffError):
+            # TODO: should ruff be raising a parse error here?
+            ruff_api.isort_string("invalid.py", CODE_INVALID)

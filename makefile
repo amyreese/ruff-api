@@ -12,7 +12,7 @@ version:
 venv: .venv
 
 test:
-	python -m pytest
+	python -m pytest --verbose
 	python -m mypy -p ruff_api
 
 lint:

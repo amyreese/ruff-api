@@ -1,5 +1,4 @@
-use pyo3::exceptions::{self};
-use pyo3::{create_exception, prelude::*};
+use pyo3::prelude::*;
 use ruff_formatter::LineWidth;
 use ruff_linter::linter::lint_fix;
 use ruff_linter::registry::Rule;
@@ -13,10 +12,9 @@ use rustc_hash::FxHashMap;
 use glob::Pattern;
 use std::path::Path;
 
-create_exception!(ruff_api, FormatModuleError, exceptions::PyException);
-create_exception!(ruff_api, FormatError, FormatModuleError);
-create_exception!(ruff_api, ParseError, FormatModuleError);
-create_exception!(ruff_api, PrintError, FormatModuleError);
+pyo3::import_exception!(ruff_api.errors, FormatError);
+pyo3::import_exception!(ruff_api.errors, ParseError);
+pyo3::import_exception!(ruff_api.errors, PrintError);
 
 // handle converting from ruff's native errors to exported exceptions
 fn convert_error(error: &ruff_python_formatter::FormatModuleError) -> PyErr {
@@ -209,9 +207,5 @@ fn ruff_api(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<FormatOptions>()?;
     m.add_function(wrap_pyfunction!(isort_string, m)?)?;
     m.add_class::<SortOptions>()?;
-    m.add("FormatModuleError", _py.get_type::<FormatModuleError>())?;
-    m.add("FormatError", _py.get_type::<FormatError>())?;
-    m.add("ParseError", _py.get_type::<ParseError>())?;
-    m.add("PrintError", _py.get_type::<PrintError>())?;
     Ok(())
 }
