@@ -23,7 +23,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = [
-    "attribution==1.7.1",
+    "attribution==1.8.0",
     "flake8==7.0.0",
     "maturin==1.7.0",
     "mypy==1.10.0",
