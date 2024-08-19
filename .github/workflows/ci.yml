@@ -35,12 +35,11 @@ jobs:
           - os: ubuntu-latest
             target: x86_64
           - os: ubuntu-latest
-            target: i686
+            target: aarch64
           - os: windows-latest
             target: amd64
-          - os: windows-latest
-            target: win32
     env:
+      CIBW_ARCHS_LINUX: auto aarch64
       CIBW_BUILD: "*${{ matrix.target }}"
       CIBW_SKIP: pp* *-musllinux*
       CIBW_BEFORE_ALL_LINUX: curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
@@ -49,6 +48,11 @@ jobs:
       CIBW_TEST_EXTRAS: "dev"
     steps:
       - uses: actions/checkout@v4
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
       - uses: pypa/cibuildwheel@v2.20
       - uses: actions/upload-artifact@v4
         with:
