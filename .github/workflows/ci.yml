@@ -113,7 +113,7 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [build, test, sdist]
+    needs: [build, lint, test, sdist]
     permissions:
       id-token: write
     steps:
