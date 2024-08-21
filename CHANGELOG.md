@@ -7,14 +7,16 @@ ruff-api
 v0.0.8
 ------
 
-Maintenance release
+Feature release
 
+- Add optional `root` parameter to `isort_string` (#46)
 - Test and build wheels for Python 3.13
 - Dropped wheel builds for 32-bit x86, arm7l, s390x, and ppc
 
 ```text
 $ git shortlog -s v0.0.7...v0.0.8
-     2	Amethyst Reese
+     4	Amethyst Reese
+     1	Thomas P.
 ```
 
 
