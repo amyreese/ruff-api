@@ -94,6 +94,7 @@ print "hello world!"
 """
 
 
+
 class SmokeTest(TestCase):
     def test_format(self) -> None:
         self.assertEqual(
@@ -142,6 +143,12 @@ class SmokeTest(TestCase):
         self.assertEqual(
             CODE_SORTED_IMPORTS_CUSTOM,
             ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
+        )
+
+    def test_isort_root(self) -> None:
+        self.assertEqual(
+            CODE_SORTED_IMPORTS,
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, root="/home/ruff"),
         )
 
     @expectedFailure
