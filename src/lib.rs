@@ -11,6 +11,8 @@ use rustc_hash::FxHashMap;
 
 use glob::Pattern;
 use std::path::Path;
+use std::env;
+use std::path::PathBuf;
 
 pyo3::import_exception!(ruff_api.errors, FormatError);
 pyo3::import_exception!(ruff_api.errors, ParseError);
@@ -119,16 +121,24 @@ impl SortOptions {
 }
 
 #[pyfunction]
-#[pyo3(signature = (path, source, options=None))]
+#[pyo3(signature = (path, source, options=None, root=None))]
 fn isort_string(
     path: String,
     source: String,
     options: Option<&SortOptions>,
+    root: Option<String>,
 ) -> PyResult<String> {
     let ipath: &Path = Path::new(&path);
+
     let options: SortOptions = match options {
         None => SortOptions::default(),
         Some(options) => options.clone(),
+    };
+
+    let root_path = if root.is_some() {
+        PathBuf::from(root.unwrap())
+    } else {
+        PathBuf::from(env::current_dir()?)
     };
 
     let first_party_modules_pattern = options
@@ -142,11 +152,14 @@ fn isort_string(
         .map(|s| Pattern::new(s).expect("Invalid pattern"))
         .collect();
 
+
     let linter_settings: LinterSettings = LinterSettings {
+        src: vec![root_path],
         isort: isort::settings::Settings {
             case_sensitive: false,
             order_by_type: false,
             combine_as_imports: true,
+
             known_modules: KnownModules::new(
                 first_party_modules_pattern,  // first-party
                 vec![],                       // third-party

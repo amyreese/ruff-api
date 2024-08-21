@@ -144,6 +144,12 @@ class SmokeTest(TestCase):
             ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
+    def test_isort_root(self) -> None:
+        self.assertEqual(
+            CODE_SORTED_IMPORTS,
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, root="/home/ruff"),
+        )
+
     @expectedFailure
     def test_isort_parse_error(self) -> None:
         with self.assertRaises(ruff_api.RuffError):

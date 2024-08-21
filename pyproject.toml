@@ -55,3 +55,4 @@ python_files = "tests/*.py"
 
 [tool.ufmt]
 formatter = "ruff-api"
+sorter = "ruff-api"
