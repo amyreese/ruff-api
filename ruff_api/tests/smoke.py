@@ -94,7 +94,6 @@ print "hello world!"
 """
 
 
-
 class SmokeTest(TestCase):
     def test_format(self) -> None:
         self.assertEqual(
