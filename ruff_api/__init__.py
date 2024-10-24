@@ -9,7 +9,7 @@ __author__ = "Amethyst Reese"
 
 from .__ruff_version__ import ruff_version
 from .__version__ import __version__
-from ._rust import format_string, FormatOptions, isort_string, SortOptions
+from ._rust import FormatOptions, SortOptions, format_string, isort_string
 from .errors import FormatError, ParseError, PrintError, RuffError
 
 __all__ = (
