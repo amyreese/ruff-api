@@ -99,23 +99,58 @@ fn format_string(
 // -- Import Sorting --
 
 #[pyclass(get_all)]
-#[derive(Default, Clone)]
+#[derive(Clone, Debug)]
 struct SortOptions {
     first_party_modules: Vec<String>,
     standard_library_modules: Vec<String>,
+    case_sensitive: bool,
+    combine_as_imports: bool,
+    detect_same_package: bool,
+    order_by_type: bool,
 }
 
 #[pymethods]
 impl SortOptions {
     #[new]
-    #[pyo3(signature = (first_party_modules=None, standard_library_modules=None))]
+    #[pyo3(signature = (
+        first_party_modules=None,
+        standard_library_modules=None,
+        case_sensitive=None,
+        combine_as_imports=None,
+        detect_same_package=None,
+        order_by_type=None,
+    ))]
     fn new(
         first_party_modules: Option<Vec<String>>,
         standard_library_modules: Option<Vec<String>>,
+        case_sensitive: Option<bool>,
+        combine_as_imports: Option<bool>,
+        detect_same_package: Option<bool>,
+        order_by_type: Option<bool>,
     ) -> Self {
         Self {
             first_party_modules: first_party_modules.unwrap_or(vec![]),
             standard_library_modules: standard_library_modules.unwrap_or(vec![]),
+            // match default values from upstream ruff
+            case_sensitive: case_sensitive.unwrap_or(false),
+            combine_as_imports: combine_as_imports.unwrap_or(false),
+            detect_same_package: detect_same_package.unwrap_or(true),
+            order_by_type: order_by_type.unwrap_or(true),
+        }
+    }
+}
+
+impl Default for SortOptions {
+    fn default() -> Self {
+        Self {
+            first_party_modules: vec![],
+            standard_library_modules: vec![],
+            // match default values from upstream ruff
+            case_sensitive: false,
+            combine_as_imports: false,
+            detect_same_package: true,
+            order_by_type: true,
+
         }
     }
 }
@@ -134,7 +169,7 @@ fn isort_string(
         None => SortOptions::default(),
         Some(options) => options.clone(),
     };
-
+    
     let root_path = if root.is_some() {
         PathBuf::from(root.unwrap())
     } else {
@@ -156,9 +191,10 @@ fn isort_string(
     let linter_settings: LinterSettings = LinterSettings {
         src: vec![root_path],
         isort: isort::settings::Settings {
-            case_sensitive: false,
-            order_by_type: false,
-            combine_as_imports: true,
+            case_sensitive: options.case_sensitive,
+            combine_as_imports: options.combine_as_imports,
+            detect_same_package: options.detect_same_package,
+            order_by_type: options.order_by_type,
 
             known_modules: KnownModules::new(
                 first_party_modules_pattern,  // first-party

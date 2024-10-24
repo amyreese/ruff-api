@@ -2,7 +2,7 @@
 # Licensed under the MIT license
 
 import multiprocessing
-from unittest import expectedFailure, TestCase
+from unittest import TestCase, expectedFailure
 
 import ruff_api
 
@@ -44,8 +44,8 @@ foo()
 
 CODE_UNSORTED_IMPORTS = """\
 import sys, CUSTOMMOD
-from firstparty import a, c,b
-from sysmod import Z,x
+from firstparty import a,c,b
+from sysmod import x,a,T
 import __strict__
 import somecustom
 import __static__
@@ -65,7 +65,7 @@ import sys
 import CUSTOMMOD
 import somecustom
 from firstparty import a, b, c
-from sysmod import x, Z
+from sysmod import T, a, x
 
 
 def main(): pass
@@ -78,12 +78,29 @@ import __static__
 import __strict__
 
 import sys
-from sysmod import x, Z
+from sysmod import T, a, x
 
 import CUSTOMMOD
 import somecustom
 
 from firstparty import a, b, c
+
+
+def main(): pass
+"""
+
+CODE_SORTED_IMPORTS_WITH_FLAGS = """\
+import __future__
+
+import __static__
+import __strict__
+
+import sys
+
+import CUSTOMMOD
+import somecustom
+from firstparty import a, b, c
+from sysmod import a, T, x
 
 
 def main(): pass
@@ -138,9 +155,21 @@ class SmokeTest(TestCase):
             ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 
-        options = ruff_api.SortOptions(["firstparty"], ["sysmod"])
+        options = ruff_api.SortOptions(
+            ["firstparty"],
+            ["sysmod"],
+        )
         self.assertEqual(
             CODE_SORTED_IMPORTS_CUSTOM,
+            ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
+        )
+
+        options = ruff_api.SortOptions(
+            case_sensitive=False,
+            order_by_type=False,
+        )
+        self.assertEqual(
+            CODE_SORTED_IMPORTS_WITH_FLAGS,
             ruff_api.isort_string("hello.py", CODE_UNSORTED_IMPORTS, options),
         )
 

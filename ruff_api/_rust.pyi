@@ -17,6 +17,12 @@ class SortOptions:
         self,
         first_party_modules: List[str] | None = None,
         standard_library_modules: List[str] | None = None,
+        *,
+        # match default values from upstream ruff
+        case_sensitive: bool = False,
+        combine_as_imports: bool = False,
+        detect_same_package: bool = True,
+        order_by_type: bool = True,
     ): ...
 
 def isort_string(
