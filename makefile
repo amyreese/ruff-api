@@ -1,15 +1,33 @@
+SRCS:=ruff_api
+EXTRAS:=dev
+
+ifeq ($(OS),Windows_NT)
+	ACTIVATE:=.venv/Scripts/activate
+else
+	ACTIVATE:=.venv/bin/activate
+endif
+
+UV:=$(shell uv --version)
+ifdef UV
+	VENV:=uv venv
+	PIP:=uv pip
+else
+	VENV:=python -m venv
+	PIP:=python -m pip
+endif
+
+.venv:
+	$(VENV) .venv
+
+venv: .venv
+	source $(ACTIVATE) && make install
+	echo 'run `source $(ACTIVATE)` to use virtualenv'
+
 install:
-	python -m pip install -e .[dev]
+	$(PIP) install -Ue .[$(EXTRAS)]
 
 version:
 	python -m scripts.ruff_version
-
-.venv:
-	python -m venv .venv
-	source .venv/bin/activate && make install
-	echo 'run `source .venv/bin/activate` to activate virtualenv'
-
-venv: .venv
 
 test:
 	python -m pytest --verbose
