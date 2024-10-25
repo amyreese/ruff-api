@@ -88,9 +88,9 @@ fn format_string(
     let path: &Path = Path::new(&path);
     let format_options: PyFormatOptions = match options {
         None => PyFormatOptions::default(),
-        Some(options) => options.to_format_options(&path),
+        Some(options) => options.to_format_options(path),
     };
-    match ruff_python_formatter::format_module_source(&source.as_str(), format_options) {
+    match ruff_python_formatter::format_module_source(source.as_str(), format_options) {
         Ok(fm) => Ok(fm.into_code()),
         Err(e) => Err(convert_error(&e)),
     }
@@ -129,8 +129,8 @@ impl SortOptions {
         order_by_type: Option<bool>,
     ) -> Self {
         Self {
-            first_party_modules: first_party_modules.unwrap_or(vec![]),
-            standard_library_modules: standard_library_modules.unwrap_or(vec![]),
+            first_party_modules: first_party_modules.unwrap_or_default(),
+            standard_library_modules: standard_library_modules.unwrap_or_default(),
             // match default values from upstream ruff
             case_sensitive: case_sensitive.unwrap_or(false),
             combine_as_imports: combine_as_imports.unwrap_or(false),
@@ -150,7 +150,6 @@ impl Default for SortOptions {
             combine_as_imports: false,
             detect_same_package: true,
             order_by_type: true,
-
         }
     }
 }
@@ -170,10 +169,9 @@ fn isort_string(
         Some(options) => options.clone(),
     };
     
-    let root_path = if root.is_some() {
-        PathBuf::from(root.unwrap())
-    } else {
-        PathBuf::from(env::current_dir()?)
+    let root_path = match root {
+        None => env::current_dir()?,
+        Some(value) => PathBuf::from(value),
     };
 
     let first_party_modules_pattern = options

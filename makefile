@@ -34,6 +34,7 @@ test:
 	python -m mypy -p ruff_api
 
 lint:
+	cargo clippy
 	python -m flake8 ruff_api
 	python -m ufmt check ruff_api
 	python scripts/validate_formatting.py
