@@ -37,6 +37,7 @@ lint:
 	cargo clippy
 	python -m flake8 ruff_api
 	python -m ufmt check ruff_api
+	python scripts/ruff_version.py
 	python scripts/validate_formatting.py
 
 format:
