@@ -25,7 +25,7 @@ dependencies = []
 dev = [
     "attribution==1.8.0",
     "flake8==7.1.1",
-    "maturin==1.7.4",
+    "maturin==1.7.6",
     "mypy==1.13.0",
     "pytest==8.3.3",
     "ufmt==2.7.3",
