@@ -35,13 +35,12 @@ test:
 
 lint:
 	cargo clippy
-	python -m flake8 ruff_api
-	python -m ufmt check ruff_api
+	python -m ruff check ruff_api
 	python scripts/ruff_version.py
 	python scripts/validate_formatting.py
 
 format:
-	python -m ufmt format ruff_api
+	python -m ruff format ruff_api
 
 release: test lint
 	@echo "\nPush tags to github and let CI handle it!\n"
