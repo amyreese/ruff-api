@@ -42,7 +42,7 @@ def validate(path: Path) -> int:
     return exit_code
 
 
-def main():
+def main() -> None:
     exit_code = 0
     for file_path in chain(
         SCRIPTS_DIR.glob("**/*.py"),
