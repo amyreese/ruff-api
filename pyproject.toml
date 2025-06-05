@@ -1,5 +1,5 @@
 [build-system]
-requires = ["maturin>=1.4,<2.0"]
+requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
 
 [project]
@@ -7,21 +7,21 @@ name = "ruff-api"
 description = "Experimental API for Ruff"
 readme = "README.md"
 authors = [
-    {name="Amethyst Reese", email="amethyst@n7.gg"},
+    {name = "Amethyst Reese", email = "amethyst@n7.gg"},
 ]
-license = {file="LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 dynamic = ["version"]
 classifiers = [
     "Development Status :: 3 - Alpha",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = []
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "attribution==1.8.0",
     "flake8==7.1.1",
@@ -36,8 +36,9 @@ dev = [
 Home = "https://github.com/amyreese/ruff-api"
 
 [tool.maturin]
-features = ["pyo3/extension-module"]
 module-name = "ruff_api._rust"
+python-packages = ["ruff_api"]
+python-source = "."
 
 [tool.attribution]
 name = "ruff-api"
