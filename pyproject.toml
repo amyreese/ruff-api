@@ -10,6 +10,7 @@ authors = [
     {name = "Amethyst Reese", email = "amethyst@n7.gg"},
 ]
 license = "MIT"
+license-files = ["LICENSE"]
 dynamic = ["version"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -23,11 +24,12 @@ dependencies = []
 [dependency-groups]
 dev = [
     "attribution==1.8.0",
-    "maturin>=1.8.6",
-    "maturin-import-hook>=0.2.0",
-    "mypy==1.15.0",
-    "pytest==8.3.5",
-    "ruff==0.11.10",
+    "flake8==7.1.1",
+    "maturin==1.7.4",
+    "mypy==1.13.0",
+    "pytest==8.3.3",
+    "ufmt==2.7.3",
+    "usort==1.0.8.post1",
 ]
 
 [project.urls]
