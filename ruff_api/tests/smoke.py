@@ -2,7 +2,7 @@
 # Licensed under the MIT license
 
 import multiprocessing
-from unittest import TestCase, expectedFailure
+from unittest import expectedFailure, TestCase
 
 import ruff_api
 

@@ -41,7 +41,7 @@ lint:
 	python scripts/validate_formatting.py
 
 format:
-	python -m ufmt format ruff_api
+	python -m ufmt format ruff_api scripts
 
 release: test lint
 	@echo "\nPush tags to github and let CI handle it!\n"
