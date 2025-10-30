@@ -10,7 +10,7 @@ from difflib import unified_diff
 from itertools import chain
 from pathlib import Path
 
-from ruff_api import format_string, isort_string
+from ruff_api import format_string, isort_string, SortOptions
 
 ROOT = Path(__file__).parent.parent.resolve()
 PROJECT_DIR = ROOT / "ruff_api"
@@ -34,7 +34,13 @@ def validate(path: Path) -> int:
         print(diff(original, modified))
         exit_code = 1
 
-    if (modified := isort_string(filename, original)) != original:
+    if (
+        modified := isort_string(
+            filename,
+            original,
+            options=SortOptions(case_sensitive=False, order_by_type=False),
+        )
+    ) != original:
         print(f"ruff isort {filename}:")
         print(diff(original, modified))
         exit_code = 1
