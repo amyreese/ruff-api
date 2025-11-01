@@ -7,14 +7,14 @@ mod ruff_api {
     use ruff_formatter::LineWidth;
     use ruff_linter::linter::lint_fix;
     use ruff_linter::registry::Rule;
-    use ruff_linter::rules::isort::{self, categorize::KnownModules, ImportSection, ImportType};
-    use ruff_linter::settings::{flags, types::UnsafeFixes, LinterSettings};
+    use ruff_linter::rules::isort::{self, ImportSection, ImportType, categorize::KnownModules};
+    use ruff_linter::settings::{LinterSettings, flags, types::UnsafeFixes};
     use ruff_linter::source_kind::SourceKind;
-    use ruff_python_ast::PySourceType;
-    use ruff_python_formatter::{self, PreviewMode, PyFormatOptions, PythonVersion};
-    use rustc_hash::FxHashMap;
+    use ruff_python_ast::{PySourceType, PythonVersion};
+    use ruff_python_formatter::{self, PreviewMode, PyFormatOptions};
 
     use glob::Pattern;
+    use std::collections::HashMap;
     use std::env;
     use std::path::Path;
     use std::path::PathBuf;
@@ -70,12 +70,14 @@ mod ruff_api {
         fn to_format_options(&self, path: &Path) -> PyFormatOptions {
             PyFormatOptions::from_source_type(PySourceType::from(path))
                 .with_target_version(match self.target_version.as_str() {
-                    "py37" => PythonVersion::Py37,
-                    "py38" => PythonVersion::Py38,
-                    "py39" => PythonVersion::Py39,
-                    "py310" => PythonVersion::Py310,
-                    "py311" => PythonVersion::Py311,
-                    "py312" => PythonVersion::Py312,
+                    "py38" => PythonVersion::PY38,
+                    "py37" => PythonVersion::PY37,
+                    "py39" => PythonVersion::PY39,
+                    "py310" => PythonVersion::PY310,
+                    "py311" => PythonVersion::PY311,
+                    "py312" => PythonVersion::PY312,
+                    "py313" => PythonVersion::PY313,
+                    "py314" => PythonVersion::PY314,
                     _ => PythonVersion::default(),
                 })
                 .with_line_width(LineWidth::try_from(self.line_width).unwrap())
@@ -207,7 +209,7 @@ mod ruff_api {
                     vec![],                       // third-party
                     vec![],                       // local
                     standard_lib_modules_pattern, // standard-lib
-                    FxHashMap::from_iter([(
+                    HashMap::from_iter([(
                         "cinder-top-of-file".to_string(),
                         vec![
                             Pattern::new("__strict__").unwrap(),
