@@ -1,4 +1,4 @@
-SRCS:=ruff_api
+SRCS:=ruff_api scripts
 EXTRAS:=dev
 
 ifeq ($(OS),Windows_NT)
@@ -32,16 +32,17 @@ version:
 test:
 	python -m pytest --verbose
 	python -m mypy -p ruff_api
+	python -m mypy scripts
 
 lint:
 	cargo clippy
-	python -m flake8 ruff_api
-	python -m ufmt check ruff_api
+	python -m flake8 $(SRCS)
+	python -m ufmt check $(SRCS)
 	python scripts/ruff_version.py
 	python scripts/validate_formatting.py
 
 format:
-	python -m ufmt format ruff_api scripts
+	python -m ufmt format $(SRCS)
 
 release: test lint
 	@echo "\nPush tags to github and let CI handle it!\n"

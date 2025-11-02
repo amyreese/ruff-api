@@ -4,9 +4,9 @@ import sys
 from pathlib import Path
 from textwrap import dedent
 
-try:
+if sys.version_info >= (3, 11):
     import tomllib
-except ImportError:
+else:
     import tomli as tomllib
 
 try:
