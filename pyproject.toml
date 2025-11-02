@@ -9,10 +9,11 @@ readme = "README.md"
 authors = [
     {name="Amethyst Reese", email="amethyst@n7.gg"},
 ]
-license = {file="LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 dynamic = ["version"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 3 - Beta",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
