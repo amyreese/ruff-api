@@ -37,8 +37,9 @@ dev = [
 Home = "https://github.com/amyreese/ruff-api"
 
 [tool.maturin]
-features = ["pyo3/extension-module"]
 module-name = "ruff_api._rust"
+python-packages = ["ruff_api"]
+python-sources = "."
 
 [tool.attribution]
 name = "ruff-api"
