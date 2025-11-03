@@ -54,6 +54,7 @@ jobs:
         with:
           python-version: "3.14"
           allow-prereleases: true
+          architecture: ${{ matrix.target.arch == 'aarch64' && 'arm64' || matrix.target.arch }}
       - name: Build wheel
         uses: PyO3/maturin-action@v1
         with:
