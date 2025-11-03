@@ -38,23 +38,29 @@ jobs:
         target:
           - os: macos-latest
             arch: x86_64
+            python_arch: x64
           - os: macos-latest
             arch: aarch64
+            python_arch: arm64
           - os: ubuntu-latest
             arch: x86_64
+            python_arch: x64
           - os: ubuntu-latest
             arch: aarch64
+            python_arch: arm64
           - os: windows-latest
             arch: x64
+            python_arch: x64
           - os: windows-11-arm
             arch: aarch64
+            python_arch: arm64
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: "3.10"
           allow-prereleases: true
-          architecture: ${{ matrix.target.arch == 'aarch64' && 'arm64' || matrix.target.arch }}
+          architecture: ${{ matrix.target.python_arch }}
       - name: Build wheel
         uses: PyO3/maturin-action@v1
         with:
