@@ -1,7 +1,7 @@
 use pyo3::prelude::pymodule;
 ///
 /// Experimental Python API for Ruff
-#[pymodule(name = "_rust")]
+#[pymodule(name = "_rust", gil_used = false)]
 mod ruff_api {
     use pyo3::prelude::*;
     use ruff_formatter::LineWidth;
